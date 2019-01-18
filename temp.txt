@@ -1,0 +1,7 @@
+FuncionarioTex 1	5
+FuncionarioTex 2	3
+FuncionarioTex 3	1
+FuncionarioTex 4	3
+FuncionarioTex 5	2
+FuncionarioTex 6	5
+FuncionarioTex 7	5
