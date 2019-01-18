@@ -30,7 +30,7 @@ public class Principal {
     
     /**
      * @param args the command line arguments
-     *///
+     */
     
         private Connection connect(String db) {
         // SQLite connection string
