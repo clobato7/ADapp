@@ -111,52 +111,7 @@ public class Principal {
                 
         conexao = app.simInputData(conexao, 7); // segunda leva de dados = 7 registros
         
-        // reconexão aqui
-
-        
-//        while (conexao == true) {
-//            
-//            app.insertFuncionario("Funcionario " + i, gerador.nextInt(5) + 1); // nome , id_cargo
-//            
-//            if (i == 10) {
-//                conexao = false;
-//                //break;
-//                  } // simulando desconexão
-//           
-//            i++;
-//            
-//        }
-//        
-//        // salvando no temp.txt
-//        
-//        i=1;
-//        
-//        while (conexao == false) {
-//            
-//            writer.write("FuncionarioTex " + i +"\t" + (gerador.nextInt(5) + 1));
-//            writer.newLine();
-//                       
-//            if (i == 5) conexao = true; // simulando reconexão
-//            
-//            i++;
-//            
-//        }
-//        writer.close();// isso aqui encerra o input no txt
-
-        
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(
-//                "C:\\sqliteDB\\temp.txt"));
-//        // Write these lines to the file.
-//        // ... We call newLine to insert a newline character.
-//        writer.write("CAT");
-//        writer.newLine();
-//        writer.write("DOG");
-//        writer.newLine();
-//        writer.write("BIRD");
-//        writer.close();
-//        
-        
-        
+        // reconexão aqui        
     }
     
 
