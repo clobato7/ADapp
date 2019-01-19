@@ -29,21 +29,22 @@ public class Monitoramento implements Observer {
 
     @Override
     public void update(Observable obs, Object arg) {
-        
-        if(app.getConexao()==true) {
+
+        if (app.getConexao() == true) {
             System.out.println("Conexão = ON");
             //s            
-            String tempQuery =""; 
+            String tempQuery = "";
             try {
                 tempQuery = app.readFile("temp.txt"); // salva o conteudo do txt numa string
             } catch (IOException ex) {
                 Logger.getLogger(Monitoramento.class.getName()).log(Level.SEVERE, null, ex);
             }
-                        
+
             app.insertFuncionarioFromTxt(tempQuery); // inserte da string (txt)
-        }
-        else if (app.getConexao()==false) System.out.println("Conexão = OFF");;               
-                                
+        } else if (app.getConexao() == false) {
+            System.out.println("Conexão = OFF");
+        };
+
     }
 
 }
