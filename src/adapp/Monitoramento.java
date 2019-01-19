@@ -43,9 +43,7 @@ public class Monitoramento implements Observer {
             app.insertFuncionarioFromTxt(tempQuery);
         }
         else if (app.getConexao()==false) System.out.println("Conexão = OFF");;               
-                
-        
-        
+                                
     }
 
 }
