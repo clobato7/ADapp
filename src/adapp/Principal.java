@@ -51,7 +51,7 @@ public class Principal {
         }
     }
 
-    boolean simInputData(boolean conex, int t) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
+    boolean simInputData(boolean conex, int t, BufferedWriter w) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
         int i = 1; // contar os loops
         Random gerador = new Random(); // para colocar id_cargo aleatorios no insert
 
@@ -71,14 +71,13 @@ public class Principal {
 
         if (conex == false) {
             // cria o temp.txt se conex tiver off 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(
-                    "temp.txt")); // setando o writer pro arquivo temp.txt
+            
 
             //} else if (conex = false) {
             while (conex == false) {
 
-                writer.write("FuncionarioTex " + i + "\t" + (gerador.nextInt(5) + 1));
-                writer.newLine();
+                w.write("FuncionarioTex " + i + "\t" + (gerador.nextInt(5) + 1));
+                w.newLine();
 
                 if (i == t) {
                     conex = true; // simulando reconexão
@@ -86,8 +85,11 @@ public class Principal {
                 i++;
 
             }
-            writer.close();// isso aqui encerra o input no txt
+            //writer.close();// isso aqui encerra o input no txt // isso n deve encerrar aqui
         }
+        
+        
+        
         return conex;
 
     }
@@ -98,13 +100,19 @@ public class Principal {
         boolean conexao = true; // situação da "conexao"
 //        int i=1; // contar os loops e parar no 10 (desconexão)
         Principal app = new Principal(); // para colocar id_cargo aleatorios no insert
+        
+        BufferedWriter writer = new BufferedWriter(new FileWriter(
+                    "temp.txt")); // setando o writer pro arquivo temp.txt
 
-        conexao = app.simInputData(conexao, 5); // primeira leva de dados = 5 registros
+        conexao = app.simInputData(conexao, 5, writer); // primeira leva de dados = 5 registros
         // desconexão aqui
         
-        conexao = app.simInputData(conexao, 7); // segunda leva de dados = 7 registros
+        conexao = app.simInputData(conexao, 7, writer); // segunda leva de dados = 7 registros
         // reconexão aqui 
-               
+        
+        writer.close(); /* encerra o txt e salva nele, isso aqui eu to testando ainda, ele n deve ficar 
+                na class input pq se quiser botar mais de 2 inputs offline ele lá vai apagar o 1º*/
+        
     }
 
 }
