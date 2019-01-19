@@ -29,7 +29,8 @@ public class Principal extends Observable {
      * @param args the command line arguments
      */
     public boolean conexao = true; // situação da "conexao"
-
+    BufferedWriter writer;
+            
     public Principal() {
 
     }
@@ -112,7 +113,7 @@ public class Principal extends Observable {
 
     }
 
-    public void simInputData(Principal a, int t, BufferedWriter w) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
+    public void simInputData(Principal a, int t) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
         int i = 1; // contar os loops
         Random gerador = new Random(); // para colocar id_cargo aleatorios no insert
 
@@ -135,13 +136,13 @@ public class Principal extends Observable {
 
         while (a.getConexao() == false) {
 
-            w.write("INSERT INTO funcionario(nome,id_cargo) VALUES('FuncionarioText " + i + "'," + (gerador.nextInt(5) + 1) + ");");
+            a.writer.write("INSERT INTO funcionario(nome,id_cargo) VALUES('FuncionarioText " + i + "'," + (gerador.nextInt(5) + 1) + ");");
             //w.write("FuncionarioTex " + i + "\t" + (gerador.nextInt(5) + 1));
-            w.newLine();
+            a.writer.newLine();
 
             if (i == t) {
                 //conex = true; // simulando reconexão
-                w.close(); /* encerra o txt e salva nele, isso aqui eu to testando ainda, ele n deve ficar 
+                a.writer.close(); /* encerra o txt e salva nele, isso aqui eu to testando ainda, ele n deve ficar 
          na class input pq se quiser botar mais de 2 inputs offline ele lá vai apagar o 1º*/
                 
                 System.out.println("Inseriu no temp.txt " + i + " registro(s).");
@@ -160,19 +161,19 @@ public class Principal extends Observable {
 
         Principal app = new Principal(); // para colocar id_cargo aleatorios no insert
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(
+        app.writer = new BufferedWriter(new FileWriter(
                 "temp.txt")); // setando o writer pro arquivo temp.txt
 
         Monitoramento monit = new Monitoramento(app);
 
         app.addObserver(monit);
 
-        app.simInputData(app, 5, writer); // primeira leva de dados = 5 registros
+        app.simInputData(app, 5); // primeira leva de dados = 5 registros
         
         // desconexão aqui
         app.setConexao(false);
 
-        app.simInputData(app, 7, writer); // segunda leva de dados = 7 registros
+        app.simInputData(app, 7); // segunda leva de dados = 7 registros
         
         // reconexão aqui 
         app.setConexao(true);
