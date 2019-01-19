@@ -186,8 +186,9 @@ public class Principal extends Observable {
                 
         // reconexão aqui 
         app.setConexao(true);
-            
-
+        
+        app.simInputData(app, 2); // terceira leva de dados = 2 registros
+                    
     }
 
 }
