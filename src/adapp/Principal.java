@@ -26,6 +26,20 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
+    
+    public boolean conexao = true; // situação da "conexao"
+    
+    public boolean getConexao() {
+        return this.conexao;
+    }
+
+    public void setConexao(boolean c) {
+        this.conexao = c;
+        //setChanged();
+        //notifyObservers(name);
+    }
+    
+    
     private Connection connect(String db) {
         // SQLite connection string
         String url = "jdbc:sqlite:" + db;
@@ -97,18 +111,26 @@ public class Principal {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
 
-        boolean conexao = true; // situação da "conexao"
-//        int i=1; // contar os loops e parar no 10 (desconexão)
+        
         Principal app = new Principal(); // para colocar id_cargo aleatorios no insert
         
         BufferedWriter writer = new BufferedWriter(new FileWriter(
                     "temp.txt")); // setando o writer pro arquivo temp.txt
 
-        conexao = app.simInputData(conexao, 5, writer); // primeira leva de dados = 5 registros
+        app.conexao = app.simInputData(app.conexao, 5, writer); // primeira leva de dados = 5 registros
         // desconexão aqui
         
-        conexao = app.simInputData(conexao, 7, writer); // segunda leva de dados = 7 registros
+        app.conexao = app.simInputData(app.conexao, 7, writer); // segunda leva de dados = 7 registros
         // reconexão aqui 
+        
+        app.conexao = app.simInputData(app.conexao, 5, writer); // primeira leva de dados = 5 registros
+        // desconexão aqui
+        
+        app.conexao = app.simInputData(app.conexao, 3, writer); // segunda leva de dados = 7 registros
+        // reconexão aqui 
+        
+        
+        
         
         writer.close(); /* encerra o txt e salva nele, isso aqui eu to testando ainda, ele n deve ficar 
                 na class input pq se quiser botar mais de 2 inputs offline ele lá vai apagar o 1º*/
