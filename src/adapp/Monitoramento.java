@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class Monitoramento implements Observer {
 
-    Principal app;// boolean m_conexao;
+    Principal app;
 
     public Monitoramento(Principal p) {
         this.app = p;
@@ -32,7 +32,7 @@ public class Monitoramento implements Observer {
         
         if(app.getConexao()==true) {
             System.out.println("Conexão = ON");
-
+            //s            
             String tempQuery ="";
             try {
                 tempQuery = app.readFile("temp.txt");
