@@ -131,7 +131,7 @@ public class Principal extends Observable {
                 System.out.println("Inseriu no banco " + i + " registro(s).");
                 //a.setConexao(false);
                 return;
-            } // simulando desconexão
+            } 
 
             i++;
 
@@ -146,8 +146,7 @@ public class Principal extends Observable {
             if (i == t) {
                 //conex = true; // simulando reconexão
                 a.writer.close();
-                /* encerra o txt e salva nele, isso aqui eu to testando ainda, ele n deve ficar 
-                 na class input pq se quiser botar mais de 2 inputs offline ele lá vai apagar o 1º*/
+                /* encerra o txt e salva nele*/
 
                 System.out.println("Inseriu no temp.txt " + i + " registro(s).");
                 //setConexao(true);
