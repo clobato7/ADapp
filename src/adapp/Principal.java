@@ -21,18 +21,12 @@ import java.io.IOException;
  * @author Caio Lobato
  */
 public class Principal {
-        
+
     //Principal app = new Principal();
-    
-
-
-    
-    
     /**
      * @param args the command line arguments
      */
-    
-        private Connection connect(String db) {
+    private Connection connect(String db) {
         // SQLite connection string
         String url = "jdbc:sqlite:" + db;
         Connection conn = null;
@@ -43,41 +37,44 @@ public class Principal {
         }
         return conn;
     }
-    
+
     public void insertFuncionario(String nome, int id_cargo) {
         String sql = "INSERT INTO funcionario(nome,id_cargo) VALUES(?,?)";
- 
+
         try (Connection conn = this.connect("funcionario.db");
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nome);
-            pstmt.setInt(2, id_cargo);        
+            pstmt.setInt(2, id_cargo);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    boolean simInputData(boolean conex,int t) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
+
+    boolean simInputData(boolean conex, int t) throws IOException { // conex verifica a conexao | t numero de registros a simular o input
         int i = 1; // contar os loops
         Random gerador = new Random(); // para colocar id_cargo aleatorios no insert
-        
-        BufferedWriter writer = new BufferedWriter(new FileWriter(
-                "temp.txt")); // setando o writer pro arquivo temp.txt
-            
+
         //if (conex = true) {
-            while (conex == true) {
+        while (conex == true) {
 
-                insertFuncionario("Funcionario " + i, gerador.nextInt(5) + 1); // nome , id_cargo
+            insertFuncionario("Funcionario " + i, gerador.nextInt(5) + 1); // nome , id_cargo
 
-                if (i == t) {
-                    conex = false;
-                    return conex;
-                } // simulando desconexão
+            if (i == t) {
+                conex = false;
+                return conex;
+            } // simulando desconexão
 
-                i++;
+            i++;
 
-            }
-        //} else if (conex = false) {
+        }
+
+        if (conex == false) {
+            // cria o temp.txt se conex tiver off 
+            BufferedWriter writer = new BufferedWriter(new FileWriter(
+                    "temp.txt")); // setando o writer pro arquivo temp.txt
+
+            //} else if (conex = false) {
             while (conex == false) {
 
                 writer.write("FuncionarioTex " + i + "\t" + (gerador.nextInt(5) + 1));
@@ -90,29 +87,24 @@ public class Principal {
 
             }
             writer.close();// isso aqui encerra o input no txt
-
+        }
         return conex;
-    
+
     }
-    
-    
-    
+
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        
+
         boolean conexao = true; // situação da "conexao"
 //        int i=1; // contar os loops e parar no 10 (desconexão)
         Principal app = new Principal(); // para colocar id_cargo aleatorios no insert
-    
-        
+
         conexao = app.simInputData(conexao, 5); // primeira leva de dados = 5 registros
-        
         // desconexão aqui
-                
-        conexao = app.simInputData(conexao, 7); // segunda leva de dados = 7 registros
         
-        // reconexão aqui        
+        conexao = app.simInputData(conexao, 7); // segunda leva de dados = 7 registros
+        // reconexão aqui 
+               
     }
-    
 
 }
